@@ -1,0 +1,180 @@
+/QUERY PARA CONOCER CLASIFICACION DE TUPLAS SEGUN DIMENSIONES/
+select od.ofertaperfil_id, count (*)
+from oferta o, oferta_detalle od
+where o.id_oferta=od.id_oferta
+and o.id_estado is null and od.ind_activo is null
+group by od.ofertaperfil_id
+order by 1 desc;
+
+/ QUERY PARA DETERMINAR TUPLAS SIN CLASIFICAR /
+
+select trim(od.descripcion_normalizada) as descripcion,count(*) as nrows
+from webscraping w inner join oferta o
+on (w.id_webscraping=o.id_webscraping)
+inner join oferta_detalle od
+on (o.id_oferta=od.id_oferta)
+left outer join ofertaperfil_tipo opt
+on (od.ofertaperfil_id=opt.ofertaperfil_id)
+where length(trim(od.descripcion_normalizada))<=220
+and o.id_estado is null and opt.ofertaperfil_id is null and od.ind_activo is null
+group by trim(od.descripcion_normalizada)
+order by 2 desc;
+
+/QUERY PARA FILTRAR TUPLAS SEGUN CRITERIOS/
+select od.id_ofertadetalle,trim(od.descripcion_normalizada) as descripcion
+from webscraping w inner join oferta o
+on (w.id_webscraping=o.id_webscraping)
+inner join oferta_detalle od
+on (o.id_oferta=od.id_oferta)
+left outer join ofertaperfil_tipo opt
+on (od.ofertaperfil_id=opt.ofertaperfil_id)
+where length(trim(od.descripcion_normalizada))<=220
+and o.id_estado is null and opt.ofertaperfil_id is null and ind_activo is null
+and ( position('MANTENER' in trim(descripcion_normalizada))>0
+--or position('VISITA DE INMUEBLES.' in trim(descripcion_normalizada))>0
+)
+order by 2;
+
+/QUERY PARA CLASIFICAR LA TUPLAR SEGUN DIMENSION/
+update oferta_detalle
+set ofertaperfil_id=5,
+f_equipo=CURRENT_DATE,
+equipo='G-FORCE'
+where id_ofertadetalle in ( copio los registros
+);
+/QUERY PARA ANULAR LA TUPLA/
+update oferta_detalle
+set ind_activo=3, // no se mueve
+f_equipo=CURRENT_DATE,
+equipo='NOMBREDETUEQUIPO'
+where id_ofertadetalle 
+//
+select od.id_ofertadetalle,trim(od.descripcion_normalizada) as descripcion
+from webscraping w inner join oferta o
+on (w.id_webscraping=o.id_webscraping)
+inner join oferta_detalle od
+on (o.id_oferta=od.id_oferta)
+left outer join ofertaperfil_tipo opt
+on (od.ofertaperfil_id=opt.ofertaperfil_id)
+where length(trim(od.descripcion_normalizada))<=220
+and o.id_estado is null and opt.ofertaperfil_id is null and ind_activo is null
+and ( position('ESTABILIDAD LABORAL' in trim(descripcion_normalizada))>0
+)
+order by 2;
+update oferta_detalle
+set ofertaperfil_id=5,
+f_equipo=CURRENT_DATE,
+equipo='G-FORCE'
+where id_ofertadetalle in (472563,472198)
+//
+select od.id_ofertadetalle,trim(od.descripcion_normalizada) as descripcion
+from webscraping w inner join oferta o
+on (w.id_webscraping=o.id_webscraping)
+inner join oferta_detalle od
+on (o.id_oferta=od.id_oferta)
+left outer join ofertaperfil_tipo opt
+on (od.ofertaperfil_id=opt.ofertaperfil_id)
+where length(trim(od.descripcion_normalizada))<=220
+and o.id_estado is null and opt.ofertaperfil_id is null and ind_activo is null
+and ( position('PLAN DE CARRERA PROFESIONAL' in trim(descripcion_normalizada))>0
+)
+order by 2;
+update oferta_detalle
+set ofertaperfil_id=5,
+f_equipo=CURRENT_DATE,
+equipo='G-FORCE'
+where id_ofertadetalle in (766024,766032,238805,76892,236278,299062,240168,78203,636190,470621,470643,298479,636200,422424,468673)
+//
+select od.id_ofertadetalle,trim(od.descripcion_normalizada) as descripcion
+from webscraping w inner join oferta o
+on (w.id_webscraping=o.id_webscraping)
+inner join oferta_detalle od
+on (o.id_oferta=od.id_oferta)
+left outer join ofertaperfil_tipo opt
+on (od.ofertaperfil_id=opt.ofertaperfil_id)
+where length(trim(od.descripcion_normalizada))<=220
+and o.id_estado is null and opt.ofertaperfil_id is null and ind_activo is null
+and ( position('PLANILLA' in trim(descripcion_normalizada))>0
+)
+order by 2;
+
+update oferta_detalle
+set ofertaperfil_id=5,
+f_equipo=CURRENT_DATE,
+equipo='G-FORCE'
+where id_ofertadetalle in (361399,362762,150388,4676,11196,21953,490581,22839,491008,11699,12102,23929,32041,27850,38891,39352,39356,32045,38895,12104,27854,11701,22843,491011,23931)
+//
+select od.id_ofertadetalle,trim(od.descripcion_normalizada) as descripcion
+from webscraping w inner join oferta o
+on (w.id_webscraping=o.id_webscraping)
+inner join oferta_detalle od
+on (o.id_oferta=od.id_oferta)
+left outer join ofertaperfil_tipo opt
+on (od.ofertaperfil_id=opt.ofertaperfil_id)
+where length(trim(od.descripcion_normalizada))<=220
+and o.id_estado is null and opt.ofertaperfil_id is null and ind_activo is null
+and ( position('HORARIO FLEXIBLE' in trim(descripcion_normalizada))>0
+)
+order by 2;
+
+update oferta_detalle
+set ofertaperfil_id=5,
+f_equipo=CURRENT_DATE,
+equipo='G-FORCE'
+where id_ofertadetalle in (758570)
+//
+select od.id_ofertadetalle,trim(od.descripcion_normalizada) as descripcion
+from webscraping w inner join oferta o
+on (w.id_webscraping=o.id_webscraping)
+inner join oferta_detalle od
+on (o.id_oferta=od.id_oferta)
+left outer join ofertaperfil_tipo opt
+on (od.ofertaperfil_id=opt.ofertaperfil_id)
+where length(trim(od.descripcion_normalizada))<=220
+and o.id_estado is null and opt.ofertaperfil_id is null and ind_activo is null
+and ( position('SEGURO' in trim(descripcion_normalizada))>0
+order by 2;
+
+update oferta_detalle
+set ofertaperfil_id=5,
+f_equipo=CURRENT_DATE,
+equipo='G-FORCE'
+where id_ofertadetalle in (764448,765726,631415,631417,207793)
+//
+select od.id_ofertadetalle,trim(od.descripcion_normalizada) as descripcion
+from webscraping w inner join oferta o
+on (w.id_webscraping=o.id_webscraping)
+inner join oferta_detalle od
+on (o.id_oferta=od.id_oferta)
+left outer join ofertaperfil_tipo opt
+on (od.ofertaperfil_id=opt.ofertaperfil_id)
+where length(trim(od.descripcion_normalizada))<=220
+and o.id_estado is null and opt.ofertaperfil_id is null and ind_activo is null
+and ( position('CTS' in trim(descripcion_normalizada))>0
+)
+order by 2;
+
+update oferta_detalle
+set ofertaperfil_id=5,
+f_equipo=CURRENT_DATE,
+equipo='G-FORCE'
+where id_ofertadetalle in (526887,760672,506386,332173,247764,332634,332226,502457,706120,443823,399642,284754,206193,549237,62535,720027,460234,501530,721891,328797,401960,375126,397598,446580,446523,724483,723181,537805,515985,515969,515904,570530,536266,536132,762599,697873,724554,724544,526538,746544,520455,396903,396823,493473,751008,626157,738297,205640,387781,423473,203807,562385,407155,563092,408468,402276,242108,290322,289531,61491,283241,402707,384947,62177,760732,718434,760670,553314,542964,757398,762527,760468,764649,762856,592517,720025,375132,374146,374749,374694,374918,310885,508113,720711,722510,508117)
+//
+select od.id_ofertadetalle,trim(od.descripcion_normalizada) as descripcion
+from webscraping w inner join oferta o
+on (w.id_webscraping=o.id_webscraping)
+inner join oferta_detalle od
+on (o.id_oferta=od.id_oferta)
+left outer join ofertaperfil_tipo opt
+on (od.ofertaperfil_id=opt.ofertaperfil_id)
+where length(trim(od.descripcion_normalizada))<=220
+and o.id_estado is null and opt.ofertaperfil_id is null and ind_activo is null
+and ( position('BONOS' in trim(descripcion_normalizada))>0
+)
+order by 2;
+
+update oferta_detalle
+set ofertaperfil_id=5,
+f_equipo=CURRENT_DATE,
+equipo='G-FORCE'
+where id_ofertadetalle in (764174)
